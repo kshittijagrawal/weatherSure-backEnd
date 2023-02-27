@@ -13,7 +13,6 @@ import com.example.weatherSure.repository.HourlyDataRepository;
 import com.example.weatherSure.repository.LocationRepository;
 import com.example.weatherSure.service.WeatherService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
