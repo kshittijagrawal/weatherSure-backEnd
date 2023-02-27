@@ -49,7 +49,7 @@ public class WeatherController {
     @DeleteMapping("/admin/completeRedisData")
     public ResponseEntity<String> deleteRedisData(){
         Boolean res = weatherService.deleteRedisData();
-        if (res == true)
+        if (res)
             return new ResponseEntity<>("successfully cleared cache.", HttpStatus.OK);
         else
             return new ResponseEntity<>("system couldn't clear cache.", HttpStatus.OK);
