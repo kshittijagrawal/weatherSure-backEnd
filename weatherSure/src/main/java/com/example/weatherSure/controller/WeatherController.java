@@ -25,19 +25,19 @@ public class WeatherController {
         return new ResponseEntity<>("hello from the weather backend", HttpStatus.OK);
     }
 
-    @PostMapping("/admin/location")
+    @PostMapping("/location")
     public ResponseEntity<String> addLocationAndDetails(@RequestBody LocationDTO locationDTO) {
         String locationAdded = weatherService.addLocationAndDetails(locationDTO);
         return new ResponseEntity<>(locationAdded + " added to the database", HttpStatus.OK);
 
     }
 
-    @GetMapping("/admin/details/{queryLocation}")
+    @GetMapping("/details/{queryLocation}")
     public ResponseEntity<Location> getDetails(@PathVariable("queryLocation") String queryLocation)throws Exception {
         return new ResponseEntity<>(weatherService.getDetails(queryLocation), HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin/location/{queryLocation}")
+    @DeleteMapping("/location/{queryLocation}")
     public ResponseEntity<String> deleteLocation(@PathVariable("queryLocation") String queryLocation) {
         Boolean res = weatherService.deleteLocation(queryLocation);
         if (res)
@@ -46,7 +46,7 @@ public class WeatherController {
             return new ResponseEntity<>(queryLocation + " not present in the data", HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin/completeRedisData")
+    @DeleteMapping("/completeRedisData")
     public ResponseEntity<String> deleteRedisData(){
         Boolean res = weatherService.deleteRedisData();
         if (res)
@@ -55,7 +55,7 @@ public class WeatherController {
             return new ResponseEntity<>("system couldn't clear cache.", HttpStatus.OK);
     }
 
-    @PostMapping("/admin/currentData/{queryLocation}")
+    @PostMapping("/currentData/{queryLocation}")
     public ResponseEntity<String> updateCurrentData(@PathVariable("queryLocation") String queryLocation, @RequestBody CurrentDataDTO currentDataDTO)throws Exception {
         Boolean res = weatherService.updateCurrentData(queryLocation, currentDataDTO);
         if (res)
@@ -69,7 +69,7 @@ public class WeatherController {
         return new ResponseEntity<>(weatherService.getRedisDetails(queryLocation), HttpStatus.OK);
     }
 
-    @PostMapping("/admin/dailyData/{queryLocation}")
+    @PostMapping("/dailyData/{queryLocation}")
     public ResponseEntity<String> addOrUpdateDailyData(@PathVariable("queryLocation") String queryLocation, @RequestBody DailyDataDTO dailyDataDTO)throws Exception{
         Boolean res = weatherService.addOrUpdateDailyData(queryLocation, dailyDataDTO);
         if (res)
@@ -78,7 +78,7 @@ public class WeatherController {
             return new ResponseEntity<>(queryLocation + " not present in the data", HttpStatus.OK);
     }
 
-    @PostMapping("/admin/hourlyData/{queryLocation}/{date}")
+    @PostMapping("/hourlyData/{queryLocation}/{date}")
     public ResponseEntity<String> addOrUpdateHourlyData(@PathVariable("queryLocation") String queryLocation, @PathVariable("date") String date,
                                                         @RequestBody HourlyDataDTO hourlyDataDTO)throws Exception {
         Integer res = weatherService.addOrUpdateHourlyData(queryLocation, date, hourlyDataDTO);
