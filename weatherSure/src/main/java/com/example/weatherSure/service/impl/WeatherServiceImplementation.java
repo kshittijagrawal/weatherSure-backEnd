@@ -134,6 +134,24 @@ public class WeatherServiceImplementation implements WeatherService {
   }
 
   @Override
+  public Integer getTotalCount() {
+    return locationRepository.findAll().size();
+  }
+
+  @Override
+  public List<HashMap> getAllLocations() {
+    List<HashMap> result = new ArrayList<>();
+    List<Location> data = locationRepository.findAll();
+    for (Location singleData : data) {
+      HashMap<String, String> singleLocation = new HashMap<>();
+      singleLocation.put("location", singleData.getName());
+      singleLocation.put("dateTimeUpdated", singleData.getDateTimeUpdated());
+      result.add(singleLocation);
+    }
+    return result;
+  }
+
+  @Override
   public Boolean addOrUpdateDailyData(String queryLocation, DailyDataDTO dailyDataDTO)
       throws Exception {
     Optional<Location> location = findLocationById(queryLocation);
@@ -184,16 +202,16 @@ public class WeatherServiceImplementation implements WeatherService {
         if (dailyData.getDate().equals(date)) {
           flag = true;
           if (dailyData.getHourlyData().size() == 0) {
-             List<HourlyData> hourlyDataList = new ArrayList<>();
-             HourlyData hourlyData = new HourlyData();
-             BeanUtils.copyProperties(hourlyDataDTO, hourlyData);
-             hourlyDataList.add(hourlyData);
-             dailyData.setHourlyData(hourlyDataList);
-             locationRepository.save(location1);
-//            HourlyData hourlyData = new HourlyData();
-//            BeanUtils.copyProperties(hourlyDataDTO, hourlyData);
-//            dailyData.getHourlyData().add(hourlyData);
-//            locationRepository.save(location1);
+            List<HourlyData> hourlyDataList = new ArrayList<>();
+            HourlyData hourlyData = new HourlyData();
+            BeanUtils.copyProperties(hourlyDataDTO, hourlyData);
+            hourlyDataList.add(hourlyData);
+            dailyData.setHourlyData(hourlyDataList);
+            locationRepository.save(location1);
+            // HourlyData hourlyData = new HourlyData();
+            // BeanUtils.copyProperties(hourlyDataDTO, hourlyData);
+            // dailyData.getHourlyData().add(hourlyData);
+            // locationRepository.save(location1);
           } else {
             HourlyData hourlyData = new HourlyData();
             BeanUtils.copyProperties(hourlyDataDTO, hourlyData);

@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/weather")
@@ -32,9 +34,19 @@ public class WeatherController {
 
     }
 
-    @GetMapping("/details/{queryLocation}")
+    @GetMapping("/location/{queryLocation}")
     public ResponseEntity<Location> getDetails(@PathVariable("queryLocation") String queryLocation)throws Exception {
         return new ResponseEntity<>(weatherService.getDetails(queryLocation), HttpStatus.OK);
+    }
+
+    @GetMapping("/totalCount")
+    public ResponseEntity<Integer> getTotalCount(){
+        return new ResponseEntity<>(weatherService.getTotalCount(), HttpStatus.OK);
+    }
+
+    @GetMapping("/allLocations")
+    public ResponseEntity<List> getAllLocations(){
+        return new ResponseEntity<>(weatherService.getAllLocations(), HttpStatus.OK);
     }
 
     @DeleteMapping("/location/{queryLocation}")
