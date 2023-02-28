@@ -5,7 +5,6 @@ import com.example.weatherSure.dto.DailyDataDTO;
 import com.example.weatherSure.dto.HourlyDataDTO;
 import com.example.weatherSure.dto.LocationDTO;
 import com.example.weatherSure.entity.Location;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +15,7 @@ public interface WeatherService {
     public Optional<Location> findLocationById(String queryLocation);
     public Boolean updateCurrentData(String queryLocation, CurrentDataDTO currentDataDTO)throws Exception;
     public Boolean deleteLocation(String queryLocation);
+    public Boolean deleteAllLocations();
     public Boolean deleteRedisData();
     public Location getDetails(String queryLocation) throws Exception;
     public Integer getTotalCount();

@@ -58,6 +58,15 @@ public class WeatherController {
             return new ResponseEntity<>(queryLocation + " not present in the data", HttpStatus.OK);
     }
 
+    @DeleteMapping("/allLocations")
+    public ResponseEntity<String> deleteAllLocations(){
+        Boolean res = weatherService.deleteAllLocations();
+        if (res)
+            return new ResponseEntity<>("cleared the database", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("couldn't clear the database", HttpStatus.OK);
+    }
+
     @DeleteMapping("/completeRedisData")
     public ResponseEntity<String> deleteRedisData(){
         Boolean res = weatherService.deleteRedisData();

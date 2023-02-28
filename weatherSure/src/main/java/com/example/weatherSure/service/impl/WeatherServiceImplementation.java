@@ -104,13 +104,25 @@ public class WeatherServiceImplementation implements WeatherService {
 
   @Override
   public Boolean deleteLocation(String queryLocation) {
-    Long res = redisTemplate.opsForHash().delete(KEY, queryLocation);
-    System.out.println("Redis deleted: " + res + " field(s) from its data.");
-
     if (locationRepository.existsById(queryLocation)) {
       locationRepository.deleteById(queryLocation);
+      Long res = redisTemplate.opsForHash().delete(KEY, queryLocation);
+      System.out.println("Redis deleted: " + res + " field(s) from its data.");
       return true;
     } else {
+      return false;
+    }
+  }
+
+  @Override
+  public Boolean deleteAllLocations() {
+    try {
+      locationRepository.deleteAll();
+      Boolean useless = deleteRedisData();
+      System.out.println("Deleted Redis Data while clearing database : " + useless);
+      return true;
+    } catch(Exception ex){
+      ex.printStackTrace();
       return false;
     }
   }
