@@ -118,6 +118,7 @@ public class WeatherServiceImplementation implements WeatherService {
   public Boolean deleteAllLocations() {
     try {
       locationRepository.deleteAll();
+      currentDataRepository.deleteAll();
       Boolean useless = deleteRedisData();
       System.out.println("Deleted Redis Data while clearing database : " + useless);
       return true;
