@@ -122,7 +122,7 @@ public class WeatherServiceImplementation implements WeatherService {
       Boolean useless = deleteRedisData();
       System.out.println("Deleted Redis Data while clearing database : " + useless);
       return true;
-    } catch(Exception ex){
+    } catch (Exception ex) {
       ex.printStackTrace();
       return false;
     }
