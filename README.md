@@ -17,6 +17,8 @@ WeatherSure backend is built using the following technologies:
 Before running the Weather Application backend, ensure that you have the following dependencies installed on your machine:
 
 - Java Development Kit (JDK): The backend is developed using Java, so you need to have JDK installed. The recommended version is JDK 8 or later.
+- Redis: You need to have Redis installed and running. You can download Redis from the official website or use a package manager to install it.
+- MongoDB: You need to have MongoDB installed and running. You can download MongoDB from the official website or use a package manager to install it.
 - Apache Maven: Maven is used as the build tool for the project. Make sure you have Maven installed.
 
 ## Getting Started
